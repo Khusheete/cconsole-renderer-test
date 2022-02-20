@@ -1,11 +1,13 @@
 #include "Renderer.h"
 #include "Input.h"
-#include "consts.h"
 
 #include <stdlib.h>
 #include <unistd.h>
 #include <math.h>
 #include <time.h>
+
+
+#define PI 3.141592654
 
 
 void draw_clock_hand(int x, int y, int r, float angle);
