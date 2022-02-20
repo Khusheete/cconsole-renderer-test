@@ -31,6 +31,10 @@
 #define RESET_INTENSITY "\x1b[22m"
 
 
+#define STDIN 0
+#define STDOUT 1
+
+
 //quelques constantes
 #define PI 3.141592654
 

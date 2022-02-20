@@ -7,10 +7,8 @@
 #include <stdio.h>
 #include <termios.h>
 #include <signal.h>
+#include <sys/select.h>
 
-
-#define STDIN 0
-#define STDOUT 1
 
 static struct termios base_iconfig;
 static struct termios iconfig;
@@ -42,8 +40,9 @@ void cnsr_init() {
 
     FATAL_ERROR(tcgetattr(STDIN, &iconfig) < 0, "[CNSR] Could not get config for stdin");
     base_iconfig = iconfig; //save the previous terminal configuration
-    iconfig.c_lflag &= !(ICANON | ECHO); //do not echo from stdin and make input available
-    iconfig.c_lflag &= ISIG;
+    // do not echo from stdin and make input available
+    // and do not interpret signals
+    iconfig.c_lflag &= !(ICANON | ECHO | ISIG); 
     iconfig.c_cc[VMIN] = 1;
     iconfig.c_cc[VTIME] = 0;
     FATAL_ERROR(tcsetattr(STDIN, 0, &iconfig) < 0, "[CNSR] Could not set config for stdin");

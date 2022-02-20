@@ -1,4 +1,5 @@
 #include "Renderer.h"
+#include "Input.h"
 #include "consts.h"
 
 #include <stdlib.h>
@@ -12,7 +13,7 @@ int min(int a, int b);
 
 
 int main(void) {
-    cnsr_init();
+    cnsr_init(1000000 / 60);
 
     int width;
     int height;
@@ -21,6 +22,11 @@ int main(void) {
     int radius;
     
     while (true) {
+        const CnsrInput input = cnsr_listen_input(1000000 / 20);
+
+        if (input.type == CNSR_SINT)
+            exit(EXIT_SUCCESS);
+
         if (cnsr_begin_draw()) {
             width = cnsr_get_width();
             height = cnsr_get_height();
@@ -52,7 +58,6 @@ int main(void) {
         draw_clock_hand(center_x, center_y, (radius / 2) - 1, hangle);
 
         cnsr_end_draw();
-        usleep(1000000 / 60); //~ 60 fps
     }
     
     return EXIT_SUCCESS;
