@@ -15,9 +15,6 @@
 static struct termios base_iconfig;
 static struct termios iconfig;
 
-// static struct termios base_oconfig;
-// static struct termios oconfig;
-
 //console data
 static int console_width  = 0;
 static int console_height = 0;
@@ -35,7 +32,6 @@ void _cnsr_update_canvas_size_info();
 int _cnsr_read_size();
 void _cnsr_set_back_color(const CnsrColor color);
 void _cnsr_set_front_color(const CnsrColor color);
-void _cnsr_interrupt(int signo);
 
 
 /* ----- function implementation ----- */
@@ -43,7 +39,6 @@ void cnsr_init() {
     system("clear");
 
     FATAL_ERROR(atexit(&_cnsr_exit), "[CNSR] Could not register exit function");
-    FATAL_ERROR(signal(SIGINT, &_cnsr_interrupt), "[CNSR] Could not register signal SIGINT interupt");
 
     FATAL_ERROR(tcgetattr(STDIN, &iconfig) < 0, "[CNSR] Could not get config for stdin");
     base_iconfig = iconfig; //save the previous terminal configuration
@@ -59,11 +54,6 @@ void cnsr_init() {
     //chunk height should ALWAYS be a multiple of 2
     sbuff = cnsr_create_screen_buffer(1, 1, 16, 16);
     printf("\x1b[?25l"); //hide cursor
-}
-
-
-void _cnsr_interrupt(int signo) {
-    _cnsr_exit();
 }
 
 
