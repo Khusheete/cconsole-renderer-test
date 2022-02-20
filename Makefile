@@ -15,4 +15,4 @@ build: $(OBJS)
 	$(AR) rcs bin/libcnsrenderer.a $(OBJS)
 
 test-%: tests/%.c build
-	$(CC) $< --std=c99 $(WARNINGS) -o bin/$@ -I./src -L./bin -lcnsrenderer
+	$(CC) $< --std=c99 $(WARNINGS) -o bin/$@ -I./src -L./bin -lcnsrenderer -lm

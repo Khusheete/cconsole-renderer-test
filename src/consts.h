@@ -3,6 +3,9 @@
  * pour embellir le programme des autres fichiers
 */
 
+//TODO refactor to fit in the library
+//eg. have a second terminal opened for the program ?
+
 #ifndef CONSTS_H
 #define CONSTS_H
 

@@ -1,4 +1,10 @@
 #ifndef RENDERER_H
+#define RENDERER_H
+
+
+// TODO: exit signal (ctrl+c ctrl+d)
+
+#include <stdbool.h>
 
 
 typedef struct {
@@ -27,8 +33,9 @@ static const CnsrColor bright_cyan    = {0  , 255, 255};
 //initialisation functions
 void cnsr_init();
 
-/* should be used at the begining of a draw loop */
-void cnsr_begin_draw();
+/* should be used at the begining of a draw loop 
+   returns weather the screen was resized        */
+bool cnsr_begin_draw();
 /* finally draws on the screen (if it did not push the buffer to the screen yet) */
 void cnsr_end_draw();
 
@@ -39,28 +46,28 @@ int cnsr_get_height();
 
 
 //simple draw functions
-void cnsr_clear();
+void cnsr_clear(const CnsrColor color);
 
 void cnsr_fill_color(const CnsrColor color);
-void cnsr_text_color(const CnsrColor color);
+// void cnsr_text_color(const CnsrColor color);
 
-void cnsr_point_of_char(const char c, int x, int y);
+// void cnsr_point_of_char(const char c, int x, int y);
 void cnsr_point(int x, int y);
-void cnsr_line_of_char(const char c, int x1, int y1, int x2, int y2);
+// void cnsr_line_of_char(const char c, int x1, int y1, int x2, int y2);
 void cnsr_line(int x1, int y1, int x2, int y2);
 
 
-void cnsr_rect_boundary_of_chars(const char c, int x, int y, int w, int h);
+// void cnsr_rect_boundary_of_chars(const char c, int x, int y, int w, int h);
 void cnsr_rect_boundary(int x, int y, int w, int h);
-void cnsr_rect_of_chars(const char c, int x, int y, int w, int h);
+// void cnsr_rect_of_chars(const char c, int x, int y, int w, int h);
 void cnsr_rect(int x, int y, int w, int h);
 
 
-void cnsr_ellipse_of_char(const char c, int cx, int cy, int w, int h);
+// void cnsr_ellipse_of_char(const char c, int cx, int cy, int w, int h);
 void cnsr_ellipse(int cx, int cy, int w, int h);
 
 
-void cnsr_text(const char* str, int x, int y);
+// void cnsr_text(const char* str, int x, int y);
 
 
 #endif //#ifndef RENDERER_H
