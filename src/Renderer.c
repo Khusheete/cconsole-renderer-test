@@ -42,7 +42,7 @@ void cnsr_init() {
     base_iconfig = iconfig; //save the previous terminal configuration
     // do not echo from stdin and make input available
     // and do not interpret signals
-    iconfig.c_lflag &= !(ICANON | ECHO | ISIG); 
+    iconfig.c_lflag &= ~(ICANON | ECHO | ISIG); 
     iconfig.c_cc[VMIN] = 1;
     iconfig.c_cc[VTIME] = 0;
     FATAL_ERROR(tcsetattr(STDIN, 0, &iconfig) < 0, "[CNSR] Could not set config for stdin");
